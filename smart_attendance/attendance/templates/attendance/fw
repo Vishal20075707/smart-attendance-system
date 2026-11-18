@@ -1,0 +1,101 @@
+body { text-align: center; margin-top: 50px; background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ font-family: 'Plus Jakarta Sans', sans-serif;}
+
+
+
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        button {color: #efefef;;font-weight: 500; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; border-radius: 12px; border: none; cursor: pointer;}
+        input {padding: 10px; border-radius: 8px; border: 1px solid #ccc;}
+    </style>
+    <title>AI Student Attendance</title>
+    {% load static %}
+    <style>
+        body { text-align: center; margin-top: 50px; font-family: Arial, Helvetica, sans-serif;
+            background-image: url('{% static "C:\smartAttendance\smart_attendance\static\background.png" %}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-attachment: fixed;
+            color: #fff;
+        }
+        button { padding: 20px 33px; margin: 20px; font-size: 18px; }
+        #registerPopup {  padding: 20px; margin-top: 20px; display:none; }
+    </style>
+</head>
+<body>
+    <h1 style="
+font-size:80px;
+font-weight:800;
+line-height:1.5;
+margin: bottom 8px;
+display:inline-block;
+background:linear-gradient(
+90deg,
+#FFD166 0%,
+#FF6B6B 25%,
+#FF4DDB 50%,
+#8B5CF6 75%,
+#00E5FF 100%
+);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-clip:text;
+">
+Smart Attendance
+</h1>
+
+<div style="
+width:250px;
+height:4px;
+margin:10px auto 30px;
+background:linear-gradient(
+90deg,
+transparent,
+#FF6B6B,
+#FF4DDB,
+#8B5CF6,
+transparent
+);
+border-radius:10px;
+
+"></div>
+    <h2 style="color: #B0C7D6;">A smart AI-powered attendance system using facial recognition </h2>
+    <button style="background: linear-gradient(
+    135deg,
+    #FFB347,
+    #FF4D8D
+);" class="button" onclick="openRegister()"><i class="fa-solid fa-user-plus"></i> Register Student</button>
+    <button style="background: linear-gradient(
+    135deg,
+    #A855F7,
+    #5B21B6
+);" onclick="window.location.href='/attendance/'"><i class="fa-solid fa-camera"></i> Take Attendance</button>
+    <button style="background: linear-gradient(
+    135deg,
+    #0EA5E9,
+    #22C55E
+);" onclick="window.location.href='/database/'"><i class="fa-solid fa-database"></i> View Database</button>
+    <div id="registerPopup">
+        <form method="POST" action="/register/">
+            {% csrf_token %}
+            <label style="font-family: comic sans ms; color: white;">Name : </label><input id="input" type="text" name="name" required><br><br>
+            <label style="font-family: comic sans ms; color: white;">Roll No : </label><input type="text" name="roll_no" required><br><br>
+            <button type="submit">Capture Face</button>
+        </form>
+    </div>
+
+    <script>
+        function openRegister() {
+            document.getElementById("registerPopup").style.display = "block";
+        }
+    </script>
+</body>
+</html>

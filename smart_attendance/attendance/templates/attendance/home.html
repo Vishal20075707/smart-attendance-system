@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>AI Student Attendance</title>
+
+
+{% load static %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        margin-top: 100px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+
+        background-image:url('{% static "b2.png" %}');
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+        background-attachment:fixed;
+
+        color:white;
+    }
+
+    h1{
+        font-size:72px;
+        font-weight:900;
+        line-height:1.1;
+        letter-spacing:-2px;
+        margin-bottom:15px;
+
+        background:linear-gradient(
+            90deg,
+            #FFD166 0%,
+            #FF6B6B 25%,
+            #FF4DDB 50%,
+            #8B5CF6 75%,
+            #00E5FF 100%
+        );
+
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        background-clip:text;
+
+        display:inline-block;
+    }
+
+    .heading-line{
+        width:280px;
+        height:4px;
+        margin:10px auto 30px;
+
+        background:linear-gradient(
+            90deg,
+            transparent,
+            #FF6B6B,
+            #FF4DDB,
+            #8B5CF6,
+            transparent
+        );
+
+        border-radius:10px;
+
+        
+    }
+
+    .subtitle{
+        color:#D7DDF5;
+        font-size:23px;
+        font-weight:500;
+        margin-bottom:60px;
+    }
+
+    .button-container{
+        display:flex;
+        gap:25px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    button{
+        padding:20px 35px;
+        border:none;
+        border-radius:14px;
+        font-size:18px;
+        font-weight:600;
+        color:white;
+        cursor:pointer;
+        transition:0.3s ease;
+    }
+
+    button:hover{
+        transform:translateY(-3px);
+    }
+
+    button i{
+        margin-right:10px;
+    }
+
+    .register-btn{
+        background:linear-gradient(
+            135deg,
+            #FFB347,
+            #FF4D8D
+        );
+    }
+
+    .attendance-btn{
+        background:linear-gradient(
+            135deg,
+            #A855F7,
+            #5B21B6
+        );
+    }
+
+    .database-btn{
+        background:linear-gradient(
+            135deg,
+            #0EA5E9,
+            #22C55E
+        );
+    }
+
+    #registerPopup{
+        display:none;
+        margin-top:40px;
+        padding:20px;
+        border-radius:15px;
+        backdrop-filter:blur(10px);
+    }
+
+    input{
+        padding:12px;
+        border-radius:8px;
+        border:none;
+        width:250px;
+        margin-top:10px;
+    }
+
+    label{
+        font-size:18px;
+    }
+
+    .submit-btn{
+        background:linear-gradient(
+            135deg,
+            #FF6B6B,
+            #8B5CF6
+        );
+        margin-top:15px;
+    }
+</style>
+
+
+</head>
+
+<body>
+
+
+<h1>Smart Attendance</h1>
+
+<div class="heading-line"></div>
+
+<div class="subtitle">
+    A smart AI-powered attendance system using facial recognition
+</div>
+
+<div class="button-container">
+
+    <button class="register-btn" onclick="openRegister()">
+        <i class="fa-solid fa-user-plus"></i>
+        Register Student
+    </button>
+
+    <button class="attendance-btn"
+        onclick="window.location.href='/attendance/'">
+        <i class="fa-solid fa-camera"></i>
+        Take Attendance
+    </button>
+
+    <button class="database-btn"
+        onclick="window.location.href='/database/'">
+        <i class="fa-solid fa-database"></i>
+        View Database
+    </button>
+
+</div>
+
+<div id="registerPopup">
+
+    <form method="POST" action="/register/">
+
+        {% csrf_token %}
+
+        <label>Name</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Roll No</label><br>
+        <input type="text" name="roll_no" required><br><br>
+
+        <button class="submit-btn" type="submit">
+            Capture Face
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+    function openRegister() {
+        document.getElementById("registerPopup").style.display = "block";
+    }
+</script>
+
+
+</body>
+</html>
